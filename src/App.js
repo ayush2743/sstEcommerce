@@ -1,23 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
 
+import './App.css';
+import Products from './components/Products/Products';
+import { useEffect, useState } from "react";
 function App() {
+
+  let [cart, setCart] = useState({});
+
+  function increaseQuantity(product) {
+    const newCart = {...cart};
+    if(!newCart[product.id]) {
+      newCart[product.id] = {
+        id: product.id,
+        title: product.title,
+        price: product.price,
+        quantity: 1
+      };
+    }
+    else {
+      newCart[product.id].quantity++;
+    }
+    setCart(newCart);
+  }
+
+  function decreaseQuantity(product) {
+    const newCart = {...cart};
+    if(newCart[product.id].quantity > 1) {
+      newCart[product.id].quantity--;
+    }
+    else {
+      delete newCart[product.id];
+    }
+    setCart(newCart);
+  }
+  
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <Products cart = {cart} increaseQuantity = {increaseQuantity} decreaseQuantity={decreaseQuantity}/>
     </div>
   );
 }
