@@ -1,13 +1,13 @@
 import AddToCart from '../AddToCart/AddToCart';
+import ReduxAddToCart from '../ReduxAddToCart';
 
-
-function ProductCard({ product, cart, increaseQuantity, decreaseQuantity }) {
+function ProductCard({ product }) {
 
   return (
     <div className="product-card">
         <h3>{product.title}</h3>
         <p>{product.price.value}</p>
-        <AddToCart product={product} cart={cart} increaseQuantity={increaseQuantity} decreaseQuantity={decreaseQuantity} />
+        <ReduxAddToCart product={product} />    
     </div>
     )
   }
