@@ -6,7 +6,7 @@ function ProductCard({ product }) {
   return (
     <div className="product-card">
       <h3>{product.title}</h3>
-      <p>${product.price.value}</p> {/* Ensure price is formatted */}
+      <p>₹{product.price.value}</p> {/* Ensure price is formatted */}
       <ReduxAddToCart product={product} />    
     </div>
   );
