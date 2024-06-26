@@ -1,18 +1,19 @@
-import AddToCart from '../AddToCart/AddToCart';
+import React from 'react';
 import ReduxAddToCart from '../ReduxAddToCart';
+import './ProductCard.css'; // Import CSS file
 
 function ProductCard({ product }) {
-
   return (
     <div className="product-card">
-        <h3>{product.title}</h3>
-        <p>{product.price.value}</p>
-        <ReduxAddToCart product={product} />    
+      <h3>{product.title}</h3>
+      <p>${product.price.value}</p> {/* Ensure price is formatted */}
+      <ReduxAddToCart product={product} />    
     </div>
-    )
-  }
-  
+  );
+}
+
 export default ProductCard;
+
   
 
 //ProductCard()

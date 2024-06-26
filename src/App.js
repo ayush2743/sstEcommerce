@@ -1,44 +1,20 @@
 import './App.css';
 import Products from './components/Products/Products';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useState } from 'react';
 import CartContext from './context/CartContext';
 import Cart from './components/Cart/Cart';
 function App() {
-  // state variable
-  // inc
-  // dec
-  let [cart, setCart] = useState({});
-  function increaseQuantity(product) {
-    const newCart = { ...cart };
-    // if(cart[product.id])
-    if (!newCart[product.id]) {
-      newCart[product.id] = {
-        ...product,
-        quantity: 0
-      };
-    }
-    newCart[product.id].quantity += 1;
-    console.log(newCart);
-    setCart(newCart);
-  }
-
-  function decreaseQuantity(product) {
-    const newCart = { ...cart };
-    if (!newCart[product.id]) return;
-    newCart[product.id].quantity -= 1;
-    if (newCart[product.id].quantity <= 0) {
-      delete newCart[product.id];
-    }
-    setCart(newCart);
-  }
 
   return (
-    <CartContext.Provider value={{ cart, increaseQuantity, decreaseQuantity}}>
-      <div className="App">
-        <Products  />
-        <Cart/>
+    <Router>
+      <div>
+        <Routes> 
+          <Route path="/products" element={<Products />}/>
+          <Route path="/cart" element={<Cart />} />
+        </Routes> 
       </div>
-    </CartContext.Provider>
+    </Router>
   );
 }
 
