@@ -1,32 +1,30 @@
 import ProductCard from "../ProductCard/ProductCard";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 
-function Products() {
-  console.log("Products");
-  const [products, setProduct] = useState([]);
+function Products({ selectedCategory }) {
+    const [products, setProducts] = useState([]);
 
-  useEffect(() => {
-    fetch("https://602fc537a1e9d20017af105e.mockapi.io/api/v1/products")
-      .then((response) => response.json())
-      .then((res) => {
-        console.log(res);
-        setProduct(res);
-      });
-  }, []); // Empty dependency array ensures this effect runs only once when the component mounts
+    useEffect(() => {
+        fetch("https://602fc537a1e9d20017af105e.mockapi.io/api/v1/products")
+            .then((response) => response.json())
+            .then((res) => {
+                setProducts(res);
+            });
+    }, []); 
 
-  return (
-    <div>
-      <Link to = "/cart">
-      <h4>Goto Cart</h4>
-      </Link>
-      {
-        products.map(function (item, index) {
-          return (<ProductCard key={index}  product={item} />)
-        })
-      }
-    </div>
-  );
+    const filteredProducts = selectedCategory
+        ? products.filter(product => product.category === selectedCategory)
+        : products;
+
+    return (
+        <div className="product-card-menu">
+            {
+                filteredProducts.map((item, index) => (
+                    <ProductCard key={index} product={item} />
+                ))
+            }
+        </div>
+    );
 }
 
 export default Products;

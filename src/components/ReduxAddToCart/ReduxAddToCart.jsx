@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart } from "../../store";
 import { removeFromCart } from "../../store";
+
 function ReduxAddToCart({ product }) {
     console.log("add to cart", product.id);
     // useSelector
@@ -20,15 +21,15 @@ function ReduxAddToCart({ product }) {
 
     if (quantity === 0) {
         return (
-            <div>
+            <div className="addtocart-button">
                 <button onClick={increase}>AddToCart</button>
             </div>
      )  
     } else {
         return ( 
-            <div>
+            <div className="addtocart-button">
                 <button onClick={decrease}>-</button>
-                <span>{quantity}</span>
+                <span className="quantity-text">       {quantity}       </span>
                 <button onClick={increase}>+</button>
             </div>
         )
